@@ -78,12 +78,36 @@ public class TodoController {
     @PostMapping(path = "check")
     String check(@RequestParam String id, Model model){
         TodoDao todoDao = todoRepository.findById(id).get();
-        if (todoDao.getIsClose() == null)
+        if (todoDao.getIsClose() == null) {
             todoDao.setIsClose(true);
-        else {
+        } else {
             todoDao.setIsClose(null);
         }
         todoService.updateTodo(id, todoDao);
+        return todo(model);
+    }
+
+    /**　TODO編集画面遷移 */
+    @PostMapping(path = "editTodo")
+    String editTodo(@RequestParam String id, Model model){
+        TodoDao todoDao = todoRepository.findById(id).get();
+        String check = "未完了";
+        if (todoDao.getIsClose() == true) {
+            check = "完了";
+        }
+        model.addAttribute("todo", todoDao);
+        model.addAttribute("check", check);
+        return "todo/Edit";
+    }
+
+    /**　TODO編集 */
+    @PostMapping(path = "edit")
+    String edit(@Validated TodoForm todoForm, Model model){
+        TodoDao todoDao = todoRepository.findById(todoForm.getId()).get();
+        todoDao.setDate(todoForm.getDate());
+        todoDao.setTitle(todoForm.getTitle());
+        todoDao.setBody(todoForm.getBody());
+        todoService.updateTodo(todoForm.getId(), todoDao);
         return todo(model);
     }
 }
