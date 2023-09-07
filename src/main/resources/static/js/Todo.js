@@ -5,6 +5,12 @@ window.onload = function () {
             checkElements[i].checked = true;
         }
     }
+    var dateSortId = document.getElementById('dateSortId').value;
+    if (dateSortId == 0) {
+        document.getElementById('dateSortButton').textContent = '↓';
+    } else {
+        document.getElementById('dateSortButton').textContent = '↑';
+    }
 }
 
 
