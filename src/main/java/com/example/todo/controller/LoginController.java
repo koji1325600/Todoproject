@@ -30,6 +30,10 @@ public class LoginController {
     @PostMapping(path="todoLogin")
     String todoLogin(@RequestParam String userName, String password, Pbkdf2PasswordEncoder passwordEncoder, Model model){
         UserDao userDao = userRepository.findByUserNameDao(userName);
+        if (userDao == null) {
+            //ログイン画面に戻る
+            return "redirect:/login";
+        }
         //パスワードがDBと一致しなかった場合
         if (!passwordEncoder.matches(password,userDao.getPassword())) {
             //ログイン画面に戻る
