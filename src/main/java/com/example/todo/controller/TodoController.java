@@ -1,7 +1,5 @@
 package com.example.todo.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +35,17 @@ public class TodoController {
     /** TODO管理画面に遷移する */
     @GetMapping(path="todoList")
     String todo(Model model) {
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameList(userName);
+        todoService.displayTodo(model);
+        return "todo/Todo";
+    }
 
-        model.addAttribute("userName", userName);
-        model.addAttribute("todoList", todoList);
+    /** 日付ソート */
+    @GetMapping(path="dateSort")
+    String dateSort(@RequestParam int dateSortId, Model model){
+        if (dateSortId == 1) {
+            return "redirect:todoList";
+        }
+        todoService.dateSortTodo(model);
         return "todo/Todo";
     }
 
@@ -61,7 +65,7 @@ public class TodoController {
 
     /**　チェックを反映 */
     @PostMapping(path = "check")
-    String check(@RequestParam String id, Model model){
+    String check(@RequestParam String id, int dateSortId, Model model){
         TodoDao todoDao = todoRepository.findById(id).get();
         if (todoDao.getIsClose() == null) {
             todoDao.setIsClose(true);
@@ -69,7 +73,11 @@ public class TodoController {
             todoDao.setIsClose(null);
         }
         todoService.updateTodo(id, todoDao);
-        return "redirect:todoList";
+        if (dateSortId == 0) {
+            return "redirect:todoList";
+        }
+        todoService.dateSortTodo(model);
+        return "todo/Todo";
     }
 
     /**　TODO編集画面遷移 */
