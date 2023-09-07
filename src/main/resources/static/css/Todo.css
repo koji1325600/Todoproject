@@ -134,7 +134,7 @@ hr {
 
 .button5-2 {
 	margin-left: 50px;
-	margin-top: -79px;
+	margin-top: -63px;
 	margin-bottom: -15px;
 }
 
@@ -188,6 +188,10 @@ hr {
 .div {
 	text-align: right;
 	margin-top: -70px;
+}
+
+.divEdit{
+	text-align: right;
 }
 
 .div2 {
