@@ -30,6 +30,9 @@ public class TodoService {
         String userName = httpServletRequest.getSession().getAttribute("userName").toString();
         List<TodoDao> todoList = todoRepository.findByuserNameDateSortAscList(userName);
 
+        if (todoList.size() == 0) {
+            model.addAttribute("todoError", "まだ登録されていません!!");
+        }
         model.addAttribute("dateSortId", 0);
         model.addAttribute("userName", userName);
         model.addAttribute("todoList", todoList);
@@ -62,6 +65,9 @@ public class TodoService {
         String userName = httpServletRequest.getSession().getAttribute("userName").toString();
         List<TodoDao> todoList = todoRepository.findByuserNameDateSortDescList(userName);
 
+        if (todoList.size() == 0) {
+            model.addAttribute("todoError", "まだ登録されていません!!");
+        }
         model.addAttribute("dateSortId", 1);
         model.addAttribute("userName", userName);
         model.addAttribute("todoList", todoList);
