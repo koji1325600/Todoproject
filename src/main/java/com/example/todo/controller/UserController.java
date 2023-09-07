@@ -27,7 +27,7 @@ public class UserController {
         if (isCreate) {
           return "redirect:/login";
         } else {
-          return user();
+          return "redirect:/users";
         }
     }
 
