@@ -29,7 +29,8 @@
       <th>状況</th>
       <th>
         <div class="div2">日付</div>
-        <form action="dateSort" method="POST">
+        <form action="dateSort" method="GET">
+          <input type="hidden" name="dateSortId" id="dateSort" th:value="${dateSortId}">
           <button class="button button4">↑</button>
         </form>
       </th>

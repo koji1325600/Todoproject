@@ -1,7 +1,5 @@
 package com.example.todo.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +35,16 @@ public class TodoController {
     /** TODO管理画面に遷移する */
     @GetMapping(path="todoList")
     String todo(Model model) {
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameList(userName);
+        todoService.displayTodo(model);
+        return "todo/Todo";
+    }
 
-        model.addAttribute("userName", userName);
-        model.addAttribute("todoList", todoList);
+    @GetMapping(path="dateSort")
+    String dateSort(@RequestParam int dateSortId, Model model){
+        if (dateSortId == 1) {
+            return "redirect:todoList";
+        }
+        todoService.dateSortTodo(model);
         return "todo/Todo";
     }
 
