@@ -5,6 +5,12 @@ window.onload = function () {
             checkElements[i].checked = true;
         }
     }
+    var dateSortId = document.getElementById('dateSortId').value;
+    if (dateSortId == 0) {
+        document.getElementById('dateSortButton').textContent = '↓';
+    } else {
+        document.getElementById('dateSortButton').textContent = '↑';
+    }
 }
 
 
@@ -14,12 +20,18 @@ window.onload = function () {
     form.method = 'post';
     form.action = '/todo/check';
 
-    const hiddenField = document.createElement('input');
-    hiddenField.type = 'hidden';
-    hiddenField.name = 'id';
-    hiddenField.value = params;
+    const hiddenField1 = document.createElement('input');
+    hiddenField1.type = 'hidden';
+    hiddenField1.name = 'id';
+    hiddenField1.value = params;
 
-    form.appendChild(hiddenField);
+    const hiddenField2 = document.createElement('input');
+    hiddenField2.type = 'hidden';
+    hiddenField2.name = 'dateSortId';
+    hiddenField2.value = document.getElementById('dateSortId').value;
+
+    form.appendChild(hiddenField1);
+    form.appendChild(hiddenField2);
 
     document.body.appendChild(form);
     form.submit();

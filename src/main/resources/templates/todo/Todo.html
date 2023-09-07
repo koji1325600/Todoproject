@@ -23,14 +23,15 @@
 <body>
 <br>
 <h2>TODO一覧</h2>
-  <p class="center p">まだ登録されていません</p>
+  <p class="center p" th:text="${todoError}"></p>
   <table class="table_box">
     <tr>
       <th>状況</th>
       <th>
         <div class="div2">日付</div>
-        <form action="dateSort" method="POST">
-          <button class="button button4">↑</button>
+        <form action="dateSort" method="GET">
+          <input type="hidden" name="dateSortId" id="dateSortId" th:value="${dateSortId}">
+          <button class="button button4" id="dateSortButton"></button>
         </form>
       </th>
       <th>件名</th>
@@ -55,7 +56,7 @@
         <input type="hidden" name="id" th:value="${todo.id}">
         <button class="button button3">削除</button><br>
       </form>
-      <form action="edit" method="GET" class="linebreaks">
+      <form action="editTodo" method="POST" class="linebreaks">
         <input type="hidden" name="id" th:value="${todo.id}">
         <button class="button button3">編集</button><br>
       </form>
