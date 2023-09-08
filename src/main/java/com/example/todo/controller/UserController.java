@@ -1,5 +1,7 @@
 package com.example.todo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.todo.dao.TodoDao;
 import com.example.todo.dao.UserDao;
+import com.example.todo.repository.TodoRepository;
 import com.example.todo.repository.UserRepository;
+import com.example.todo.service.TodoService;
 import com.example.todo.service.UserService;
 
 @Controller
@@ -24,7 +29,13 @@ public class UserController {
     UserRepository userRepository;
 
     @Autowired
+    TodoRepository todoRepository;
+
+    @Autowired
     UserService userService;
+
+    @Autowired
+    TodoService todoService;
 
     @GetMapping
     String user() {
@@ -47,6 +58,23 @@ public class UserController {
         UserDao userDao = userRepository.findByUserNameDao(userName);
         model.addAttribute("user", userDao);
         return "users/Profile";
+    }
+
+    @PostMapping(path = "edit")
+    String edit(@RequestParam String userName, String mailaddress, Model model) {
+        String userMail = httpServletRequest.getSession().getAttribute("mailaddress").toString();
+        UserDao userDao = userRepository.findByMailaddressDao(userMail);
+        List<TodoDao> todoList = todoRepository.findByuserNameDateSortAscList(userDao.getUserName());
+        
+        for (TodoDao todoDao: todoList) {
+            todoDao.setName(userName);
+            todoService.updateTodo(todoDao.getId(), todoDao);
+        }
+
+        userDao.setUserName(userName);
+        userDao.setMailaddress(mailaddress);
+        userService.updateUser(userDao.getUserId(), userDao);
+        return "redirect:/login";
     }
 
 }
