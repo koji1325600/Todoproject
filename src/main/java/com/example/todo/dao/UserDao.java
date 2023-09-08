@@ -27,4 +27,8 @@ public class UserDao {
     @Column(nullable = false)
     private String password;
 
+    /** メールアドレス */
+    @Column(nullable = false)
+    private String mailaddress;
+
 }

@@ -10,6 +10,9 @@ public interface UserRepository extends JpaRepository<UserDao, Integer>, JpaSpec
     @Query("SELECT X FROM UserDao X WHERE X.userName = ?1")
     UserDao findByUserNameDao(String userName);
 
-    @Query("SELECT X.userId FROM UserDao X WHERE X.userName = ?1")
-    Integer findByUserNameInt(String userName);
+    @Query("SELECT X FROM UserDao X WHERE X.mailaddress = ?1")
+    UserDao findByMailaddressDao(String mailaddress);
+
+    @Query("SELECT X.userId FROM UserDao X WHERE X.mailaddress = ?1")
+    Integer findByMailaddressInt(String mailaddress);
 }

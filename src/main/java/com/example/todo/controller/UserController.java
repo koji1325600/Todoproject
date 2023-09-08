@@ -22,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping(path="create")
-    String create(@RequestParam String userName, String password) {
-        Boolean isCreate = userService.create(userName, password);
+    String create(@RequestParam String userName,String mailaddress, String password) {
+        Boolean isCreate = userService.create(userName, mailaddress, password);
         if (isCreate) {
           return "redirect:/login";
         } else {
