@@ -336,8 +336,8 @@ table tr:last-child td:last-child {
 
 .ECM_CheckboxInput-DummyInput {
 	position: relative;
-	top: 0;
-	left: 37;
+	top: 0px;
+	left: 37px;
 	display: block;
 	width: 25px;
 	height: 25px;

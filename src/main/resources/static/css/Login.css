@@ -10,10 +10,6 @@ body {
 	width: 100%;
 }
 
-.header {
-	background: #2fc3f0;
-}
-
 .title {
 	float: left;
 	font-size: 60px;
@@ -24,18 +20,11 @@ body {
 	text-align: center;
 }
 
-.name {
-	font-size: 35px;
-	margin-right: 450px;
-	margin-bottom: -45px;
-	margin-top: 250px;
-}
-
 .mailaddress {
 	font-size: 35px;
 	margin-right: 450px;
 	margin-bottom: -45px;
-	margin-top: 50px;
+	margin-top: 200px;
 }
 
 .password {
@@ -80,24 +69,6 @@ body {
 .button2 {
 	margin-top: 30px;
 	margin-left: 380px;
-	width: 180px;
-	padding: 4px;
-	font-size: 25px;
-	background: #4676D7;
-	text-align: center;
-}
-
-.button3 {
-	margin-top: 100px;
-	width: 180px;
-	padding: 4px 50px;
-	font-size: 25px;
-	background: #4676D7;
-	text-align: center;
-}
-
-.button4 {
-	margin-right: 180px;
 	width: 180px;
 	padding: 4px;
 	font-size: 25px;
