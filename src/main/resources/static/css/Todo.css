@@ -164,8 +164,8 @@ hr {
 	width: 70px;
 	height: 40px;
 	position: absolute;
-	left: 240px;
-	top: 0;
+    left: 260px;
+    top: 2px;
 	border-radius: 2px;
 	background: #7fbfff;
 	color: #fff;

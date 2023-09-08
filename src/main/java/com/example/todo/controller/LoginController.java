@@ -44,7 +44,7 @@ public class LoginController {
         return "redirect:todo/todoList";
     }
 
-	@PostMapping(path = "logout")
+	@GetMapping(path = "logout")
 	String logout(HttpServletRequest httpServletRequest){
 		httpServletRequest.getSession().invalidate();
 		return "/Login";
