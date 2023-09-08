@@ -9,8 +9,8 @@
 <header>
   <p class="title">TODO管理</p>
   <br>
-  <div class="div">
-    <a th:text="${userName}"></a>さん、ようこそ。
+  <div class="divEdit">
+    <a th:text="${todo.name}"></a>さん、ようこそ。
     <form action="../logout" method="POST">
       <button class="button button2">ログアウト</button>
     </form>

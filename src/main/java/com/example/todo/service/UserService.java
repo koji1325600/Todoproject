@@ -12,12 +12,13 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public Boolean create(String userName, String password){
-        if (userRepository.findByUserNameInt(userName) != null) {
+    public Boolean create(String userName, String mailaddress, String password){
+        if (userRepository.findByMailaddressInt(mailaddress) != null) {
             return false;
         }
         UserDao userDao = new UserDao();
         userDao.setUserName(userName);
+        userDao.setMailaddress(mailaddress);
         userDao.setPassword(new Pbkdf2PasswordEncoder().encode(password));
 
         userRepository.save(userDao);

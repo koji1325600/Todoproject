@@ -103,4 +103,11 @@ public class TodoController {
         todoService.updateTodo(todoForm.getId(), todoDao);
         return "redirect:todoList";
     }
+
+    /** TODO検索 */
+    @GetMapping(path = "seachTodo")
+    String seachTodo(@RequestParam String seach, Model model){
+        todoService.seachTodo(seach, model);
+        return "todo/Todo";
+    }
 }
