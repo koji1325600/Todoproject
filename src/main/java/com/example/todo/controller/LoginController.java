@@ -21,12 +21,13 @@ public class LoginController {
 	@Autowired
     UserRepository userRepository;
     
+    /** ログイン画面遷移 */
 	@GetMapping(path="login")
 	String login(Model model) {
 		return "/Login";
 	}
 
-	    /** ログイン処理を行う */
+	/** ログイン処理を行う */
     @PostMapping(path="todoLogin")
     String todoLogin(@RequestParam String mailaddress, String password, Pbkdf2PasswordEncoder passwordEncoder, Model model){
         UserDao userDao = userRepository.findByMailaddressDao(mailaddress);
@@ -41,10 +42,12 @@ public class LoginController {
         }
         //Sessionにユーザ名を設定
         httpServletRequest.getSession().setAttribute("userName", userDao.getUserName());
+        httpServletRequest.getSession().setAttribute("mailaddress", userDao.getMailaddress());
         return "redirect:todo/todoList";
     }
 
-	@PostMapping(path = "logout")
+    /** ログアウト */
+	@GetMapping(path = "logout")
 	String logout(HttpServletRequest httpServletRequest){
 		httpServletRequest.getSession().invalidate();
 		return "/Login";

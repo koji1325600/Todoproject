@@ -15,7 +15,10 @@
   </form>
   <div class="div">
     <a th:text="${userName}"></a>さん、ようこそ。
-    <form action="../logout" method="POST">
+    <form action="../users/profile" method="GET">
+      <button class="button button2">プロフィール</button>
+    </form>
+    <form action="../logout" method="GET">
       <button class="button button2">ログアウト</button>
     </form>
   </div>

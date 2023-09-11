@@ -12,6 +12,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    /** ユーザ作成 */
     public Boolean create(String userName, String mailaddress, String password){
         if (userRepository.findByMailaddressInt(mailaddress) != null) {
             return false;
@@ -23,6 +24,17 @@ public class UserService {
 
         userRepository.save(userDao);
         return true;
+    }
+
+    /** ユーザ削除処理 */
+    public void removeUser(Integer id){
+        userRepository.deleteById(id);
+    }
+
+    /** ユーザ更新処理 */
+    public void updateUser(Integer id, UserDao userDao){
+        //removeUser(id);
+        userRepository.save(userDao);
     }
     
 }
