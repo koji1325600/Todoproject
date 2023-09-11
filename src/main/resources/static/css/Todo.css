@@ -164,8 +164,8 @@ hr {
 	width: 70px;
 	height: 40px;
 	position: absolute;
-	left: 240px;
-	top: 0;
+    left: 260px;
+    top: 2px;
 	border-radius: 2px;
 	background: #7fbfff;
 	color: #fff;
@@ -336,8 +336,8 @@ table tr:last-child td:last-child {
 
 .ECM_CheckboxInput-DummyInput {
 	position: relative;
-	top: 0;
-	left: 37;
+	top: 0px;
+	left: 37px;
 	display: block;
 	width: 25px;
 	height: 25px;

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="..\static\css\CreateUser.css" th:href="@{/css/CreateUser.css}">
+  <title>TODO管理ユーザプロフィール画面</title>
+</head>
+<header class="header">
+  <p class="title">プロフィール</p>
+  <br>
+  <div class="divProfile">
+    <a th:text="${user.userName}"></a>さん、ようこそ。
+    <form action="../logout" method="GET">
+      <button class="buttonBase button3">ログアウト</button>
+    </form>
+  </div>
+</header>
+<body>
+  <div class="center">
+    <form action="edit" method="POST">
+      <div class="name">お名前</div>
+      <div class="div"><input type="text" class="text-form1" name="userName" th:value="${user.userName}" ></div>
+      <div class="mailaddress">メールアドレス</div>
+      <div class="div"><input type="text" class="text-form1" name="mailaddress" th:value="${user.mailaddress}" ></div>
+      <button type="button" class="buttonBase button1" onclick="location.href='/todo/todoList'">戻る</button>
+      <button class="buttonBase button2">編集</button>
+    </form>
+  </div>
+</body>
+</html>

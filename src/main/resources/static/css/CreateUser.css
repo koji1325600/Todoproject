@@ -3,7 +3,7 @@ header {
 	height: 100px;
 	margin-top: -8px;
 	margin-left: -8px;
-	background: #b3d874;
+	background: #2fc3f0;
 }
 
 body {
@@ -24,7 +24,14 @@ body {
 	font-size: 35px;
 	margin-right: 450px;
 	margin-bottom: -45px;
-	margin-top: 250px;
+	margin-top: 200px;
+}
+
+.mailaddress {
+	font-size: 35px;
+	margin-right: 450px;
+	margin-bottom: -45px;
+	margin-top: 50px;
 }
 
 .password {
@@ -37,6 +44,10 @@ body {
 .div {
 	margin-left: 150px;
 	margin-bottom: -15px;
+}
+
+.divProfile{
+	text-align: right;
 }
 
 .buttonBase {
@@ -55,4 +66,40 @@ body {
 .buttonBase:focus {
 	outline: none;
 	box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+.button1 {
+	margin-right: 180px;
+	width: 180px;
+	padding: 4px;
+	font-size: 25px;
+	background: #4676D7;
+	text-align: center;
+}
+
+.button2 {
+	margin-top: 100px;
+	width: 180px;
+	padding: 4px 50px;
+	font-size: 25px;
+	background: #4676D7;
+	text-align: center;
+}
+
+.button3 {
+	margin-right: 15px;
+	background: #696969;
+}
+
+.text-form1 {
+	height: 2.6em;
+	width: 350px;
+	margin-left: 50px;
+	padding: 1 16px;
+	border-radius: 4px;
+	border: none;
+	box-shadow: 0 0 0 1px #ccc inset;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 }
