@@ -105,6 +105,7 @@ public class TodoController {
         todoDao.setDate(todoForm.getDate());
         todoDao.setTitle(todoForm.getTitle());
         todoDao.setBody(todoForm.getBody());
+        todoDao.setIsRelease(todoForm.getIsRelease());
         todoService.updateTodo(todoForm.getId(), todoDao);
         return "redirect:todoList";
     }
