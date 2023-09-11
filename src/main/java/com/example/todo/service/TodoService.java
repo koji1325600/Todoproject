@@ -85,4 +85,17 @@ public class TodoService {
         model.addAttribute("userName", userName);
         model.addAttribute("todoList", todoList);
     }
+
+    /** 公開TODO一覧表示処理 */
+    public void releaseDisplayTodo(Model model){
+        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
+        List<TodoDao> todoList = todoRepository.findByReleaseDateSortAscList();
+
+        if (todoList.size() == 0) {
+            model.addAttribute("todoError", "まだ登録されていません!!");
+        }
+        model.addAttribute("dateSortId", 0);
+        model.addAttribute("userName", userName);
+        model.addAttribute("todoList", todoList);
+    }
 }

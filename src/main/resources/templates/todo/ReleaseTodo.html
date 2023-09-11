@@ -7,7 +7,7 @@
 </head>
 <script src="../../js/Todo.js"></script>
 <header>
-  <p class="title">TODO管理</p>
+  <p class="title">公開TODO</p>
   <br>
   <form action="seachTodo" method="GET" class="seachForm seach2">
     <input type="text" name="seach" class="seach" placeholder="検索...">
@@ -17,9 +17,6 @@
     <a th:text="${userName}"></a>さん、ようこそ。
     <form action="../users/profile" method="GET">
       <button class="button button2">プロフィール</button>
-    </form>
-    <form action="../todo/releaseTodo" method="GET">
-      <button class="button button2">公開TODO</button>
     </form>
     <form action="../logout" method="GET">
       <button class="button button2">ログアウト</button>
@@ -46,13 +43,14 @@
       <th>操作</th>
     </tr>
     <tr th:each="todo : ${todoList}">
-      <td>
-        <label class="ECM_CheckboxInput">
-          <input type="checkbox" name="check" class="ECM_CheckboxInput-Input" th:value="${todo.isClose}" th:onClick="|post('__${todo.id}__')|"/>
-          <span class="ECM_CheckboxInput-DummyInput"></span>
-          <span class="ECM_CheckboxInput-LabelText"></span>
-        </label>
-      </td>
+      <th:block th:with="check=${todo.isClose}">
+        <th:block th:if="${check == true}">
+          <td><a id="check" th:text="完了"></a></td>
+        </th:block>
+        <th:block th:if="${check == null}">
+          <td><a id="check" th:text="未完了"></a></td>
+        </th:block>
+      </th:block>
       <td><a th:text="${todo.date}"></a></td>
       <td><a th:text="${todo.title}"></a></td>
       <td><a th:text="${todo.body}"></a></td>
@@ -69,35 +67,9 @@
       </td>
     </tr>
   </table>
-<br>
-<h2>TODO登録</h2>
-  <div class="Form">
-    <form th:action="@{/todo/addTodo}" th:object="${TodoForm}" method="POST">
-      <div class="Form-Item">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>日付</p>
-        <input type="date" name="date" class="Form-Item-Input" required>
-      </div>
-      <div class="Form-Item">
-         <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>件名</p>
-         <input type="text" name="title" class="Form-Item-Input" required>
-      </div>
-      <div class="Form-Item">
-        <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Arbitrary">任意</span>内容</p>
-        <textarea class="Form-Item-Textarea" name="body" rows="5" cols="40"></textarea>
-      </div>
-      <hr>
-      <div class="center">
-        <p>TODOを公開しますか？<br>
-        <fieldset class="radio-001 release">
-          <label>
-            <input type="radio" name="isRelease" value="true">公開
-          </label>
-          <label>
-            <input type="radio" name="isRelease" value="" checked>非公開
-          </label>
-        </fieldset>
-      </div>
-      <button class="button1">登録</button>
+  <div class="center">
+    <form action="todoList" method="GET">
+      <button class="button1">戻る</button>
     </form>
   </div>
 </body>

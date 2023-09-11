@@ -105,6 +105,7 @@ public class TodoController {
         todoDao.setDate(todoForm.getDate());
         todoDao.setTitle(todoForm.getTitle());
         todoDao.setBody(todoForm.getBody());
+        todoDao.setIsRelease(todoForm.getIsRelease());
         todoService.updateTodo(todoForm.getId(), todoDao);
         return "redirect:todoList";
     }
@@ -114,5 +115,12 @@ public class TodoController {
     String seachTodo(@RequestParam String seach, Model model){
         todoService.seachTodo(seach, model);
         return "todo/Todo";
+    }
+
+    /** 公開TODO画面遷移 */
+    @GetMapping(path = "releaseTodo")
+    String releaseTodo(Model model){
+        todoService.releaseDisplayTodo(model);
+        return "todo/ReleaseTodo";
     }
 }
