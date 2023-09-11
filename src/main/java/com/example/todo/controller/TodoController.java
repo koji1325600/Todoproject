@@ -116,4 +116,11 @@ public class TodoController {
         todoService.seachTodo(seach, model);
         return "todo/Todo";
     }
+
+    /** 公開TODO画面遷移 */
+    @GetMapping(path = "releaseTodo")
+    String releaseTodo(Model model){
+        todoService.releaseDisplayTodo(model);
+        return "todo/ReleaseTodo";
+    }
 }
