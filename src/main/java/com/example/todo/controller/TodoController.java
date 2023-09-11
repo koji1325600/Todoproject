@@ -42,6 +42,7 @@ public class TodoController {
     /** 日付ソート */
     @GetMapping(path="dateSort")
     String dateSort(@RequestParam int dateSortId, Model model){
+        //ソートチェック
         if (dateSortId == 1) {
             return "redirect:todoList";
         }
@@ -73,6 +74,7 @@ public class TodoController {
             todoDao.setIsClose(null);
         }
         todoService.updateTodo(id, todoDao);
+
         if (dateSortId == 0) {
             return "redirect:todoList";
         }
@@ -85,9 +87,11 @@ public class TodoController {
     String editTodo(@RequestParam String id, Model model){
         TodoDao todoDao = todoRepository.findById(id).get();
         String check = "完了";
+
         if (todoDao.getIsClose() == null) {
             check = "未完了";
         }
+
         model.addAttribute("todo", todoDao);
         model.addAttribute("check", check);
         return "todo/Edit";
@@ -97,6 +101,7 @@ public class TodoController {
     @PostMapping(path = "edit")
     String edit(@Validated TodoForm todoForm, Model model){
         TodoDao todoDao = todoRepository.findById(todoForm.getId()).get();
+        
         todoDao.setDate(todoForm.getDate());
         todoDao.setTitle(todoForm.getTitle());
         todoDao.setBody(todoForm.getBody());

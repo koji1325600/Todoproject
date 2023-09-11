@@ -37,11 +37,13 @@ public class UserController {
     @Autowired
     TodoService todoService;
 
+    /** ユーザ作成画面遷移 */
     @GetMapping
     String user() {
         return "users/CreateUser";
     }
 
+    /** ユーザ作成 */
     @PostMapping(path = "create")
     String create(@RequestParam String userName, String mailaddress, String password) {
         Boolean isCreate = userService.create(userName, mailaddress, password);
@@ -52,6 +54,7 @@ public class UserController {
         }
     }
 
+    /** ユーザプロフィール画面遷移 */
     @GetMapping(path = "profile")
     String profile(Model model) {
         String userName = httpServletRequest.getSession().getAttribute("userName").toString();
@@ -60,6 +63,7 @@ public class UserController {
         return "users/Profile";
     }
 
+    /** ユーザ編集 */
     @PostMapping(path = "edit")
     String edit(@RequestParam String userName, String mailaddress, Model model) {
         String userMail = httpServletRequest.getSession().getAttribute("mailaddress").toString();
