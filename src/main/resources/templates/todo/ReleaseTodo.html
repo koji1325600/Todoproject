@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="..\static\css\Todo.css" th:href="@{/css/Todo.css}">
+  <title>TODO管理</title>
+</head>
+<script src="../../js/Todo.js"></script>
+<header>
+  <p class="title">公開TODO</p>
+  <br>
+  <form action="seachTodo" method="GET" class="seachForm seach2">
+    <input type="text" name="seach" class="seach" placeholder="検索...">
+    <button class="seachButton">検索</button>
+  </form>
+  <div class="div">
+    <a th:text="${userName}"></a>さん、ようこそ。
+    <form action="../users/profile" method="GET">
+      <button class="button button2">プロフィール</button>
+    </form>
+    <form action="../logout" method="GET">
+      <button class="button button2">ログアウト</button>
+    </form>
+  </div>
+</header>
+<body>
+<br>
+<h2>TODO一覧</h2>
+  <p class="center p" th:text="${todoError}"></p>
+  <table class="table_box">
+    <tr>
+      <th>状況</th>
+      <th>
+        <div class="div2">日付</div>
+        <form action="dateSort" method="GET">
+          <input type="hidden" name="dateSortId" id="dateSortId" th:value="${dateSortId}">
+          <button class="button button4" id="dateSortButton"></button>
+        </form>
+      </th>
+      <th>件名</th>
+      <th>内容</th>
+      <th>登録者</th>
+      <th>操作</th>
+    </tr>
+    <tr th:each="todo : ${todoList}">
+      <th:block th:with="check=${todo.isClose}">
+        <th:block th:if="${check == true}">
+          <td><a id="check" th:text="完了"></a></td>
+        </th:block>
+        <th:block th:if="${check == null}">
+          <td><a id="check" th:text="未完了"></a></td>
+        </th:block>
+      </th:block>
+      <td><a th:text="${todo.date}"></a></td>
+      <td><a th:text="${todo.title}"></a></td>
+      <td><a th:text="${todo.body}"></a></td>
+      <td><a th:text="${todo.name}"></a></td>
+      <td>
+      <div>
+        <a th:text="${todo.good}">
+      </div>
+      <form action="good" method="POST" class="linebreaks">
+        <input type="hidden" name="id" th:value="${todo.id}">
+        <button class="button button3">いいね</button><br>
+      </form>
+      </td>
+    </tr>
+  </table>
+  <div class="center">
+    <form action="todoList" method="GET">
+      <button class="button1">戻る</button>
+    </form>
+  </div>
+</body>
+</html>
