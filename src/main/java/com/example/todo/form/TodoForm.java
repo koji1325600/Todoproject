@@ -23,7 +23,4 @@ public class TodoForm {
     
     /** 状況*/
     private Boolean isClose;
-
-    /** 公開設定 */
-    private Boolean isRelease;
 }

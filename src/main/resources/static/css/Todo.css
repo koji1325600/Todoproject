@@ -200,10 +200,6 @@ hr {
 	margin-bottom: -20px;
 }
 
-.release {
-	margin-left: 262px;
-}
-
 .text-form1 {
 	height: 2.6em;
 	width: 350px;
@@ -443,63 +439,4 @@ table tr:last-child td:last-child {
 	max-width: 410px;
 	background: #eaedf2;
 	font-size: 18px;
-}
-
-.radio-001 {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .3em 2em;
-    border: none;
-}
-
-.radio-001 label {
-    display: flex;
-    align-items: center;
-    gap: 0 .5em;
-    position: relative;
-    cursor: pointer;
-}
-
-.radio-001 label::before,
-.radio-001 label::after {
-    border-radius: 50%;
-    content: '';
-}
-
-.radio-001 label::before {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #dee5eb;
-    box-sizing: border-box;
-}
-
-.radio-001 label::after {
-    position: absolute;
-    top: 50%;
-    left: 9px;
-    transform: translate(-50%, -50%);
-    width: 9px;
-    height: 9px;
-    background-color: #dee5eb;
-}
-
-.radio-001 label:has(:checked)::after {
-    background-color: #2589d0;
-    animation: anim-radio-002 .3s linear;
-}
-
-@keyframes anim-radio-001 {
-    0% {
-        box-shadow: 0 0 0 1px transparent;
-    }
-    50% {
-        box-shadow: 0 0 0 10px #2589d033;
-    }
-    100% {
-        box-shadow: 0 0 0 10px transparent;
-    }
-}
-
-.radio-001 input {
-    display: none;
 }

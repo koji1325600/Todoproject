@@ -45,14 +45,6 @@ public class TodoDao implements Serializable {
     @Column(name="is_close")
     private Boolean isClose;
 
-    /** 公開設定*/
-    @Column(name="is_release")
-    private Boolean isRelease;
-
-    /** いいね */
-    @Column
-    private int good;
-
     /**
      * デフォルトコンストラクタ。
      */

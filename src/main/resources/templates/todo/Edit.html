@@ -53,17 +53,6 @@
         <textarea class="Form-Item-Textarea" name="body" id="bodyArea" rows="5" cols="40"></textarea>
       </div>
       <hr>
-      <div class="center">
-        <p>TODOを公開しますか？<br>
-        <fieldset class="radio-001 release">
-          <label>
-            <input type="radio" name="isRelease" value="true">公開
-          </label>
-          <label>
-            <input type="radio" name="isRelease" value="" checked>非公開
-          </label>
-        </fieldset>
-      </div>
       <input type="hidden" name="id" th:value="${todo.id}">
       <button class="button5 button5-1">完了</button>
     </form>
