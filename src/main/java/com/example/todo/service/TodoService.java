@@ -74,9 +74,7 @@ public class TodoService {
     }
 
     /** TODO検索処理 */
-    public void seachTodo(String seach, Model model){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameTitleSeachDateSortAscList(userName, seach);
+    public void seachTodo(List<TodoDao> todoList, String userName, Model model){
 
         if (todoList.size() == 0) {
             model.addAttribute("todoError", "まだ登録されていません!!");

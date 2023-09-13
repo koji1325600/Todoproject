@@ -1,5 +1,7 @@
 package com.example.todo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,8 +115,19 @@ public class TodoController {
     /** TODO検索 */
     @GetMapping(path = "seachTodo")
     String seachTodo(@RequestParam String seach, Model model){
-        todoService.seachTodo(seach, model);
+        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
+        List<TodoDao> todoList = todoRepository.findByuserNameTitleSeachDateSortAscList(userName, seach);
+        todoService.seachTodo(todoList, userName, model);
         return "todo/Todo";
+    }
+
+    /** 公開TODO検索 */
+    @GetMapping(path = "seachReleaseTodo")
+    String seachReleaseTodo(@RequestParam String seach, Model model){
+        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
+        List<TodoDao> todoList = todoRepository.findByReleaseTitleSeachDateSortAscList(seach);
+        todoService.seachTodo(todoList, userName, model);
+        return "todo/ReleaseTodo";
     }
 
     /** 公開TODO画面遷移 */
