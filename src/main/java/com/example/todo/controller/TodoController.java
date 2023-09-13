@@ -123,4 +123,13 @@ public class TodoController {
         todoService.releaseDisplayTodo(model);
         return "todo/ReleaseTodo";
     }
+
+    /** いいね */
+    @PostMapping(path = "good")
+    String goodTodo(@RequestParam String id, Model model){
+        TodoDao todoDao = todoRepository.findById(id).get();
+        todoDao.setGood(todoDao.getGood() + 1);
+        todoService.updateTodo(id, todoDao);
+        return "redirect:releaseTodo";
+    }
 }

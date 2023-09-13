@@ -56,13 +56,12 @@
       <td><a th:text="${todo.body}"></a></td>
       <td><a th:text="${todo.name}"></a></td>
       <td>
-      <form action="removeTodo" method="POST" class="linebreaks">
+      <div>
+        <a th:text="${todo.good}">
+      </div>
+      <form action="good" method="POST" class="linebreaks">
         <input type="hidden" name="id" th:value="${todo.id}">
-        <button class="button button3">削除</button><br>
-      </form>
-      <form action="editTodo" method="POST" class="linebreaks">
-        <input type="hidden" name="id" th:value="${todo.id}">
-        <button class="button button3">編集</button><br>
+        <button class="button button3">いいね</button><br>
       </form>
       </td>
     </tr>
