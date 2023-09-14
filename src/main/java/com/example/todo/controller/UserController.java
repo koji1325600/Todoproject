@@ -45,12 +45,13 @@ public class UserController {
 
     /** ユーザ作成 */
     @PostMapping(path = "create")
-    String create(@RequestParam String userName, String mailaddress, String password) {
+    String create(@RequestParam String userName, String mailaddress, String password, Model model) {
         Boolean isCreate = userService.create(userName, mailaddress, password);
         if (isCreate) {
             return "redirect:/login";
         } else {
-            return "redirect:/users";
+            model.addAttribute("error", "そのメールアドレスは使用出来ません");
+            return "users/CreateUser";
         }
     }
 
