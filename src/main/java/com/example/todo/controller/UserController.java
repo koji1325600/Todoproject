@@ -57,7 +57,8 @@ public class UserController {
     /** ユーザプロフィール画面遷移 */
     @GetMapping(path = "profile")
     String profile(Model model) {
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
         UserDao userDao = userRepository.findByUserNameDao(userName);
         model.addAttribute("user", userDao);
         return "users/Profile";
@@ -66,9 +67,10 @@ public class UserController {
     /** ユーザ編集 */
     @PostMapping(path = "edit")
     String edit(@RequestParam String userName, String mailaddress, Model model) {
-        String userMail = httpServletRequest.getSession().getAttribute("mailaddress").toString();
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userMail = userRepository.findById(userId).get().getMailaddress();
         UserDao userDao = userRepository.findByMailaddressDao(userMail);
-        List<TodoDao> todoList = todoRepository.findByuserNameDateSortAscList(userDao.getUserName());
+        List<TodoDao> todoList = todoRepository.findByuserIdDateSortAscList(userDao.getUserId());
         
         for (TodoDao todoDao: todoList) {
             todoDao.setName(userName);

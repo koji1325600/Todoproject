@@ -41,8 +41,7 @@ public class LoginController {
             return "redirect:/login";
         }
         //Sessionにユーザ名を設定
-        httpServletRequest.getSession().setAttribute("userName", userDao.getUserName());
-        httpServletRequest.getSession().setAttribute("mailaddress", userDao.getMailaddress());
+        httpServletRequest.getSession().setAttribute("userId", userDao.getUserId());
         return "redirect:todo/todoList";
     }
 

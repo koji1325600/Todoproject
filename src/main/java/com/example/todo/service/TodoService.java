@@ -37,8 +37,10 @@ public class TodoService {
     
     /** TODO追加処理 */
     public void addTodo(TodoForm todoForm){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
         todoForm.setName(userName);
+        todoForm.setUserId(userId);
 
         TodoDao todoDao = new TodoDao();
         BeanUtils.copyProperties(todoForm, todoDao);
@@ -59,8 +61,9 @@ public class TodoService {
 
     /** TODO日付降順処理 */
     public void dateSortTodo(String seach, Model model){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameTitleSeachDateSortDescList(userName, seach);
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
+        List<TodoDao> todoList = todoRepository.findByuserIdTitleSeachDateSortDescList(userId, seach);
 
         if (todoList.size() == 0) {
             model.addAttribute("todoError", "まだ登録されていません!!");

@@ -25,6 +25,10 @@ public class TodoDao implements Serializable {
     @Id
     private String id;
 
+    /** ユーザID */
+    @Column(name="user_id")
+    private int userId;
+
     /** 登録者 */
     @Column
     private String name;
@@ -40,6 +44,10 @@ public class TodoDao implements Serializable {
     /** 日付*/
     @Column
     private Date date;
+
+    /** いいね */
+    @Column
+    private int good;
     
     /** 状況*/
     @Column(name="is_close")
@@ -48,10 +56,6 @@ public class TodoDao implements Serializable {
     /** 公開設定*/
     @Column(name="is_release")
     private Boolean isRelease;
-
-    /** いいね */
-    @Column
-    private int good;
 
     /**
      * デフォルトコンストラクタ。

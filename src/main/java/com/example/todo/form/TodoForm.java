@@ -9,6 +9,9 @@ public class TodoForm {
     /** ID */
     private String id;
 
+    /** ユーザID */
+    private int userId;
+
     /** 登録者 */
     private String name;
 
