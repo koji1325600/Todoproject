@@ -1,5 +1,7 @@
 package com.example.todo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +37,21 @@ public class TodoController {
     /** TODO管理画面に遷移する */
     @GetMapping(path="todoList")
     String todo(Model model) {
-        todoService.displayTodo(model);
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
+        List<TodoDao> todoList = todoRepository.findByuserIdDateSortAscList(userId);
+        todoService.displayTodo(todoList, userName, model);
         return "todo/Todo";
     }
 
     /** 日付ソート */
     @GetMapping(path="dateSort")
-    String dateSort(@RequestParam int dateSortId, Model model){
+    String dateSort(@RequestParam int dateSortId, String seach, Model model){
         //ソートチェック
         if (dateSortId == 1) {
-            return "redirect:todoList";
+            return seachTodo(seach, model);
         }
-        todoService.dateSortTodo(model);
+        todoService.dateSortTodo(seach, model);
         return "todo/Todo";
     }
 
@@ -66,7 +71,7 @@ public class TodoController {
 
     /**　チェックを反映 */
     @PostMapping(path = "check")
-    String check(@RequestParam String id, int dateSortId, Model model){
+    String check(@RequestParam String id, int dateSortId, String seach, Model model){
         TodoDao todoDao = todoRepository.findById(id).get();
         if (todoDao.getIsClose() == null) {
             todoDao.setIsClose(true);
@@ -76,9 +81,9 @@ public class TodoController {
         todoService.updateTodo(id, todoDao);
 
         if (dateSortId == 0) {
-            return "redirect:todoList";
+            return seachTodo(seach, model);
         }
-        todoService.dateSortTodo(model);
+        todoService.dateSortTodo(seach, model);
         return "todo/Todo";
     }
 
@@ -113,14 +118,31 @@ public class TodoController {
     /** TODO検索 */
     @GetMapping(path = "seachTodo")
     String seachTodo(@RequestParam String seach, Model model){
-        todoService.seachTodo(seach, model);
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
+        List<TodoDao> todoList = todoRepository.findByuserIdTitleSeachDateSortAscList(userId, seach);
+        todoService.displayTodo(todoList, userName, model);
+        model.addAttribute("seach", seach);
         return "todo/Todo";
+    }
+
+    /** 公開TODO検索 */
+    @GetMapping(path = "seachReleaseTodo")
+    String seachReleaseTodo(@RequestParam String seach, Model model){
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
+        List<TodoDao> todoList = todoRepository.findByReleaseTitleSeachDateSortAscList(seach);
+        todoService.displayTodo(todoList, userName, model);
+        return "todo/ReleaseTodo";
     }
 
     /** 公開TODO画面遷移 */
     @GetMapping(path = "releaseTodo")
     String releaseTodo(Model model){
-        todoService.releaseDisplayTodo(model);
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
+        List<TodoDao> todoList = todoRepository.findByReleaseDateSortAscList();
+        todoService.displayTodo(todoList, userName, model);
         return "todo/ReleaseTodo";
     }
 

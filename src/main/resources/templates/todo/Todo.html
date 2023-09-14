@@ -6,11 +6,12 @@
   <title>TODO管理</title>
 </head>
 <script src="../../js/Todo.js"></script>
+<script src="../../js/TodoCheck.js"></script>
 <header>
   <p class="title">TODO管理</p>
   <br>
   <form action="seachTodo" method="GET" class="seachForm seach2">
-    <input type="text" name="seach" class="seach" placeholder="検索...">
+    <input type="text" name="seach" id="seach" class="seach" th:value="${seach}" placeholder="検索...">
     <button class="seachButton">検索</button>
   </form>
   <div class="div">
@@ -37,6 +38,7 @@
         <div class="div2">日付</div>
         <form action="dateSort" method="GET">
           <input type="hidden" name="dateSortId" id="dateSortId" th:value="${dateSortId}">
+          <input type="hidden" name="seach" th:value="${seach}">
           <button class="button button4" id="dateSortButton"></button>
         </form>
       </th>
@@ -75,15 +77,15 @@
     <form th:action="@{/todo/addTodo}" th:object="${TodoForm}" method="POST">
       <div class="Form-Item">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>日付</p>
-        <input type="date" name="date" class="Form-Item-Input" required>
+        <input type="date" name="date" class="Form-Item-Input" oninput="dateCheck(this)" required>
       </div>
       <div class="Form-Item">
          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>件名</p>
-         <input type="text" name="title" class="Form-Item-Input" required>
+         <input type="text" name="title" class="Form-Item-Input" oninput="titleCheck(this)" required>
       </div>
       <div class="Form-Item">
         <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Arbitrary">任意</span>内容</p>
-        <textarea class="Form-Item-Textarea" name="body" rows="5" cols="40"></textarea>
+        <textarea class="Form-Item-Textarea" name="body" rows="5" cols="40" oninput="bodyCheck(this)"></textarea>
       </div>
       <hr>
       <div class="center">
