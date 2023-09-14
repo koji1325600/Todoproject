@@ -26,10 +26,7 @@ public class TodoService {
     UserRepository userRepository;
 
     /** TODO一覧表示処理 */
-    public void displayTodo(Model model){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameDateSortAscList(userName);
-
+    public void displayTodo(List<TodoDao> todoList, String userName, Model model){
         if (todoList.size() == 0) {
             model.addAttribute("todoError", "まだ登録されていません!!");
         }
@@ -61,41 +58,17 @@ public class TodoService {
     }
 
     /** TODO日付降順処理 */
-    public void dateSortTodo(Model model){
+    public void dateSortTodo(String seach, Model model){
         String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameDateSortDescList(userName);
+        List<TodoDao> todoList = todoRepository.findByuserNameTitleSeachDateSortDescList(userName, seach);
 
         if (todoList.size() == 0) {
             model.addAttribute("todoError", "まだ登録されていません!!");
         }
+        model.addAttribute("seach", seach);
         model.addAttribute("dateSortId", 1);
         model.addAttribute("userName", userName);
         model.addAttribute("todoList", todoList);
     }
 
-    /** TODO検索処理 */
-    public void seachTodo(String seach, Model model){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameTitleSeachDateSortAscList(userName, seach);
-
-        if (todoList.size() == 0) {
-            model.addAttribute("todoError", "まだ登録されていません!!");
-        }
-        model.addAttribute("dateSortId", 0);
-        model.addAttribute("userName", userName);
-        model.addAttribute("todoList", todoList);
-    }
-
-    /** 公開TODO一覧表示処理 */
-    public void releaseDisplayTodo(Model model){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByReleaseDateSortAscList();
-
-        if (todoList.size() == 0) {
-            model.addAttribute("todoError", "まだ登録されていません!!");
-        }
-        model.addAttribute("dateSortId", 0);
-        model.addAttribute("userName", userName);
-        model.addAttribute("todoList", todoList);
-    }
 }

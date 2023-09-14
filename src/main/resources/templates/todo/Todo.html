@@ -10,7 +10,7 @@
   <p class="title">TODO管理</p>
   <br>
   <form action="seachTodo" method="GET" class="seachForm seach2">
-    <input type="text" name="seach" class="seach" placeholder="検索...">
+    <input type="text" name="seach" id="seach" class="seach" th:value="${seach}" placeholder="検索...">
     <button class="seachButton">検索</button>
   </form>
   <div class="div">
@@ -37,6 +37,7 @@
         <div class="div2">日付</div>
         <form action="dateSort" method="GET">
           <input type="hidden" name="dateSortId" id="dateSortId" th:value="${dateSortId}">
+          <input type="hidden" name="seach" th:value="${seach}">
           <button class="button button4" id="dateSortButton"></button>
         </form>
       </th>
