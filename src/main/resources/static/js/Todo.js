@@ -30,8 +30,14 @@ window.onload = function () {
     hiddenField2.name = 'dateSortId';
     hiddenField2.value = document.getElementById('dateSortId').value;
 
+    const hiddenField3 = document.createElement('input');
+    hiddenField3.type = 'hidden';
+    hiddenField3.name = 'seach';
+    hiddenField3.value = document.getElementById('seach').value;
+
     form.appendChild(hiddenField1);
     form.appendChild(hiddenField2);
+    form.appendChild(hiddenField3);
 
     document.body.appendChild(form);
     form.submit();

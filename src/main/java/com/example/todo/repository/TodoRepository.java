@@ -14,8 +14,8 @@ public interface TodoRepository extends JpaRepository<TodoDao, String>, JpaSpeci
     List<TodoDao> findByuserNameDateSortAscList(String name);
 
     /** ユーザ名でTODOリスト取得 日付ソート 降順*/
-    @Query("SELECT X FROM TodoDao X WHERE X.name = ?1 ORDER BY X.date DESC")
-    List<TodoDao> findByuserNameDateSortDescList(String name);
+    @Query("SELECT X FROM TodoDao X WHERE X.name = ?1 AND X.title LIKE %?2% ORDER BY X.date DESC")
+    List<TodoDao> findByuserNameTitleSeachDateSortDescList(String name, String title);
 
     /** ユーザ名 タイトル近似値検索 TODOリスト取得 */
     @Query("SELECT X FROM TodoDao X WHERE X.name = ?1 AND X.title LIKE %?2% ORDER BY X.date")

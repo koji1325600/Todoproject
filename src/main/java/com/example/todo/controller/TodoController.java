@@ -45,12 +45,12 @@ public class TodoController {
 
     /** 日付ソート */
     @GetMapping(path="dateSort")
-    String dateSort(@RequestParam int dateSortId, Model model){
+    String dateSort(@RequestParam int dateSortId, String seach, Model model){
         //ソートチェック
         if (dateSortId == 1) {
-            return "redirect:todoList";
+            return seachTodo(seach, model);
         }
-        todoService.dateSortTodo(model);
+        todoService.dateSortTodo(seach, model);
         return "todo/Todo";
     }
 
@@ -70,7 +70,7 @@ public class TodoController {
 
     /**　チェックを反映 */
     @PostMapping(path = "check")
-    String check(@RequestParam String id, int dateSortId, Model model){
+    String check(@RequestParam String id, int dateSortId, String seach, Model model){
         TodoDao todoDao = todoRepository.findById(id).get();
         if (todoDao.getIsClose() == null) {
             todoDao.setIsClose(true);
@@ -80,9 +80,9 @@ public class TodoController {
         todoService.updateTodo(id, todoDao);
 
         if (dateSortId == 0) {
-            return "redirect:todoList";
+            return seachTodo(seach, model);
         }
-        todoService.dateSortTodo(model);
+        todoService.dateSortTodo(seach, model);
         return "todo/Todo";
     }
 
