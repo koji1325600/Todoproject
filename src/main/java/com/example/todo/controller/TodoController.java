@@ -37,8 +37,9 @@ public class TodoController {
     /** TODO管理画面に遷移する */
     @GetMapping(path="todoList")
     String todo(Model model) {
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameDateSortAscList(userName);
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
+        List<TodoDao> todoList = todoRepository.findByuserIdDateSortAscList(userId);
         todoService.displayTodo(todoList, userName, model);
         return "todo/Todo";
     }
@@ -117,8 +118,9 @@ public class TodoController {
     /** TODO検索 */
     @GetMapping(path = "seachTodo")
     String seachTodo(@RequestParam String seach, Model model){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
-        List<TodoDao> todoList = todoRepository.findByuserNameTitleSeachDateSortAscList(userName, seach);
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
+        List<TodoDao> todoList = todoRepository.findByuserIdTitleSeachDateSortAscList(userId, seach);
         todoService.displayTodo(todoList, userName, model);
         model.addAttribute("seach", seach);
         return "todo/Todo";
@@ -127,7 +129,8 @@ public class TodoController {
     /** 公開TODO検索 */
     @GetMapping(path = "seachReleaseTodo")
     String seachReleaseTodo(@RequestParam String seach, Model model){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
         List<TodoDao> todoList = todoRepository.findByReleaseTitleSeachDateSortAscList(seach);
         todoService.displayTodo(todoList, userName, model);
         return "todo/ReleaseTodo";
@@ -136,7 +139,8 @@ public class TodoController {
     /** 公開TODO画面遷移 */
     @GetMapping(path = "releaseTodo")
     String releaseTodo(Model model){
-        String userName = httpServletRequest.getSession().getAttribute("userName").toString();
+        int userId = Integer.parseInt(httpServletRequest.getSession().getAttribute("userId").toString());
+        String userName = userRepository.findById(userId).get().getUserName();
         List<TodoDao> todoList = todoRepository.findByReleaseDateSortAscList();
         todoService.displayTodo(todoList, userName, model);
         return "todo/ReleaseTodo";
